@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<title>Mini‑Game Sammlung</title>
+<style>
+  body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #6dd5fa, #2980b9);
+    font-family: Arial, sans-serif;
+    color: white;
+    text-align: center;
+  }
+
+  h1 { margin-bottom: 20px; }
+
+  .menu, .gameScreen {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .active { display: flex; }
+
+  button {
+    padding: 14px 26px;
+    margin: 10px;
+    font-size: 18px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    background: #ffe082;
+    color: #333;
+    font-weight: bold;
+  }
+
+  #gameContainer {
+    position: relative;
+    width: 320px;
+    height: 480px;
+    background: rgba(0,0,30,0.6);
+    border: 3px solid #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(255,255,255,0.4);
+    margin-bottom: 15px;
+  }
+
+  /* Eisblock */
+  #player { position: absolute; bottom: 10px; left: 50%; width: 40px; height: 20px; margin-left: -20px; background: #ffeb3b; border-radius: 5px; }
+  .bullet { position: absolute; width: 6px; height: 14px; background: #ff1744; border-radius: 3px; }
+  #iceBlock { position: absolute; top: 40px; width: 50px; height: 50px; background: #b3e5fc; border-radius: 8px; box-shadow: 0 0 15px #e1f5fe; }
+
+  /* Memory */
+  .grid { display: grid; grid-template-columns: repeat(4, 70px); gap: 10px; margin-top: 20px; }
+  .card { width: 70px; height: 70px; background: #3498db; color: white; font-size: 32px; display: flex; align-items: center; justify-content: center; cursor: pointer; border-radius: 8px; }
+  .matched { background: #2ecc71; cursor: default; }
+</style>
+</head>
+<body>
+
+<!-- MENU -->
+<div id="menu" class="menu active">
+  <h1>Mini‑Game Sammlung</h1>
+  <button onclick="openGame('shoot')">Eisblock schiessen</button>
+  <button onclick="openGame('reaction')">Reaktionsspiel</button>
+  <button onclick="openGame('clicker')">10‑Sekunden‑Klickspiel</button>
+  <button onclick="openGame('memory')">Mini‑Memory</button>
+</div>
+
+<!-- GAME SCREENS -->
+
+<!-- Eisblock -->
+<div id="shoot" class="gameScreen">
+  <h1>Eisblock schiessen</h1>
+  <div id="gameContainer">
+    <div id="player"></div>
+    <div id="iceBlock"></div>
+  </div>
+  <button onclick="shoot()">Schuss!</button>
+  <div>Punkte: <span id="score">0</span></div>
+  <button onclick="backToMenu()">Zurück</button>
+</div>
+
+<!-- Reaktionsspiel -->
+<div id="reaction" class="gameScreen">
+  <h1>Reaktionsspiel</h1>
+  <p>Klicke so schnell wie möglich!</p>
+  <button id="reactionStart">Start</button>
+  <div id="reactionBox" style="width:150px;height:150px;background:red;margin-top:20px;display:none;"></div>
+  <p id="reactionInfo"></p>
+  <button onclick="backToMenu()">Zurück</button>
+</div>
+
+<!-- Klickspiel -->
+<div id="clicker" class="gameScreen">
+  <h1>Klickspiel</h1>
+  <p>Klicke so oft wie möglich in 10 Sekunden!</p>
+  <button id="clickStart">Start</button>
+  <button id="clickBtn" disabled>Klick!</button>
+  <p>Punkte: <span id="clickScore">0</span></p>
+  <p>Zeit: <span id="clickTime">10</span>s</p>
+  <button onclick="backToMenu()">Zurück</button>
+</div>
+
+<!-- Memory -->
+<div id="memory" class="gameScreen">
+  <h1>Mini‑Memory</h1>
+  <p>Finde die Paare!</p>
+  <div id="memoryGrid" class="grid"></div>
+  <button onclick="backToMenu()">Zurück</button>
+</div>
+
+<script>
+/* Navigation */
+function openGame(id) {
+  document.querySelectorAll('.menu, .gameScreen').forEach(el => el.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
+
+function backToMenu() {
+  location.reload();
+}
+
+/* ---------------- Eisblock Schiessen ---------------- */
+const game = document.getElementById('gameContainer');
+const player = document.getElementById('player');
+const iceBlock = document.getElementById('iceBlock');
+const scoreSpan = document.getElementById('score');
+
+let bullets = [];
+let score = 0;
+let iceDir = 1;
+let iceSpeed = 2;
+
+function resetIce() {
+  iceBlock.style.left = Math.random() * 270 + 'px';
+}
+
+function shoot() {
+  const b = document.createElement('div');
+  b.className = 'bullet';
+  b.style.left = (player.offsetLeft + 17) + 'px';
+  b.style.top = (player.offsetTop - 10) + 'px';
+  game.appendChild(b);
+  bullets.push(b);
+}
+
+function loop() {
+  let x = parseFloat(iceBlock.style.left);
+  x += iceSpeed * iceDir;
+  if (x <= 0 || x >= 270) iceDir *= -1;
+  iceBlock.style.left = x + 'px';
+
+  bullets = bullets.filter(b => {
+    let y = parseFloat(b.style.top);
+    y -= 5;
+    b.style.top = y + 'px';
+
+    if (y < 0) { b.remove(); return false; }
+
+    const br = b.getBoundingClientRect();
+    const ir = iceBlock.getBoundingClientRect();
+
+    if (br.left < ir.right && br.right > ir.left && br.top < ir.bottom && br.bottom > ir.top) {
+      score++;
+      scoreSpan.textContent = score;
+      resetIce();
+      b.remove();
+      return false;
+    }
+    return true;
+  });
+
+  requestAnimationFrame(loop);
+}
+resetIce();
+loop();
+
+/* ---------------- Reaktionsspiel ---------------- */
+const rStart = document.getElementById('reactionStart');
+const rBox = document.getElementById('reactionBox');
+const rInfo = document.getElementById('reactionInfo');
+let rTime = 0;
+
+rStart.onclick = () => {
+  rInfo.textContent = "Warte...";
+  rBox.style.display = "none";
+  setTimeout(() => {
+    rBox.style.display = "block";
+    rTime = Date.now();
+  }, 1000 + Math.random() * 3000);
+};
+
+rBox.onclick = () => {
+  rInfo.textContent = "Reaktion: " + (Date.now() - rTime) + " ms";
+  rBox.style.display = "none";
+};
+
+/* ---------------- Klickspiel ---------------- */
+const cStart = document.getElementById('clickStart');
+const cBtn = document.getElementById('clickBtn');
+const cScore = document.getElementById('clickScore');
+const cTime = document.getElementById('clickTime');
+
+let clicks = 0;
+let timeLeft = 10;
+let timer;
+
+cStart.onclick = () => {
+  clicks = 0;
+  timeLeft = 10;
+  cScore.textContent = 0;
+  cTime.textContent = 10;
+  cBtn.disabled = false;
+
+  timer = setInterval(() => {
+    timeLeft--;
+    cTime.textContent = timeLeft;
+    if (timeLeft <= 0) {
+      clearInterval(timer);
+      cBtn.disabled = true;
+      alert("Zeit vorbei! Punkte: " + clicks);
+    }
+  }, 1000);
+};
+
+cBtn.onclick = () => {
+  clicks++;
+  cScore.textContent = clicks;
+};
+
+/* ---------------- Memory ---------------- */
+const grid = document.getElementById('memoryGrid');
+let symbols = ['🍎','🍎','⭐','⭐'];
+let first = null;
+let lock = false;
+
+function buildMemory() {
+  grid.innerHTML = "";
+  symbols.sort(() => Math.random() - 0.5);
+
+  symbols.forEach(sym => {
+    const c = document.createElement('div');
+    c.className = "card";
+    c.dataset.sym = sym;
+    c.textContent = "?";
+    c.onclick = () => flip(c);
+    grid.appendChild(c);
+  });
+}
+
+function flip(card) {
+  if (lock || card.classList.contains("matched") || card === first) return;
+
+  card.textContent = card.dataset.sym;
+
+  if (!first) {
+    first = card;
+  } else {
+    if (first.dataset.sym === card.dataset.sym) {
+      first.classList.add("matched");
+      card.classList.add("matched");
+      first = null;
+      if (document.querySelectorAll(".card:not(.matched)").length === 0) {
+        setTimeout(buildMemory, 800);
+      }
+    } else {
+      lock = true;
+      setTimeout(() => {
+        first.textContent = "?";
+        card.textContent = "?";
+        first = null;
+        lock = false;
+      }, 700);
+    }
+  }
+}
+
+buildMemory();
+</script>
+
+</body>
+</html>
