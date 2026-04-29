@@ -3,47 +3,77 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Minispiele – Startseite</title>
+    <title>Mini-Game Sammlung</title>
 
     <style>
         body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #4dd0e1, #81d4fa);
             font-family: Arial, sans-serif;
-            background: #eef2f3;
-            text-align: center;
+        }
+
+        .container {
+            background: rgba(0, 0, 0, 0.25);
             padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            color: white;
+            width: 320px;
         }
 
         h1 {
-            color: #333;
-            margin-bottom: 30px;
+            margin-top: 0;
+            font-size: 26px;
         }
 
-        .button {
-            display: inline-block;
-            margin: 15px;
-            padding: 15px 25px;
-            background: #4CAF50;
-            color: white;
-            text-decoration: none;
-            border-radius: 8px;
+        p {
+            margin-bottom: 30px;
             font-size: 18px;
         }
 
+        .button {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            margin: 10px 0;
+            background: #ffeb3b;
+            color: #333;
+            text-decoration: none;
+            font-size: 18px;
+            border-radius: 10px;
+            font-weight: bold;
+        }
+
         .button:hover {
-            background: #45a049;
+            background: #fdd835;
+        }
+
+        .footer {
+            margin-top: 25px;
+            font-size: 14px;
+            opacity: 0.8;
         }
     </style>
 </head>
 
 <body>
 
-    <h1>Mimi Mini‑Games Sammlung</h1>
+    <div class="container">
+        <h1>Mini-Game Sammlung</h1>
+        <p>Wähle ein Spiel und hab Spass!</p>
 
-    <!-- Link zur Minigames-Seite -->
-    <a class="button" href="minigames.html">Mini‑Games öffnen</a>
+        <!-- FUNKTIONIERENDER LINK ZU DEINEN SPIELEN -->
+        <a href="minigames.html" class="button">🎮 Spiele öffnen</a>
 
-    <!-- Link zur Mal-App -->
-    <a class="button" href="malapp.html">Mal‑App starten</a>
+        <!-- OPTIONALER LINK ZUR HAUPTSEITE (falls du eine hast) -->
+        <a href="index.html" class="button">🌐 Zur Hauptseite</a>
+
+        <div class="footer">© 2026 – Maluniversum Mini-Games</div>
+    </div>
 
 </body>
 </html>
