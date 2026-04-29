@@ -1,79 +1,73 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mini-Game Sammlung</title>
-
-    <style>
-        body {
-            margin: 0;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background: linear-gradient(135deg, #4dd0e1, #81d4fa);
-            font-family: Arial, sans-serif;
-        }
-
-        .container {
-            background: rgba(0, 0, 0, 0.25);
-            padding: 40px;
-            border-radius: 20px;
-            text-align: center;
-            color: white;
-            width: 320px;
-        }
-
-        h1 {
-            margin-top: 0;
-            font-size: 26px;
-        }
-
-        p {
-            margin-bottom: 30px;
-            font-size: 18px;
-        }
-
-        .button {
-            display: block;
-            width: 100%;
-            padding: 15px;
-            margin: 10px 0;
-            background: #ffeb3b;
-            color: #333;
-            text-decoration: none;
-            font-size: 18px;
-            border-radius: 10px;
-            font-weight: bold;
-        }
-
-        .button:hover {
-            background: #fdd835;
-        }
-
-        .footer {
-            margin-top: 25px;
-            font-size: 14px;
-            opacity: 0.8;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Minispiele – Charlytaxi</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to bottom, #fdf6e3, #cce7ff);
+      color: #333;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background-color: #0078d7;
+      color: white;
+      padding: 20px 0;
+      font-size: 1.8em;
+      font-weight: bold;
+    }
+    main {
+      padding: 40px 20px;
+    }
+    a.button {
+      display: inline-block;
+      background-color: #ff9800;
+      color: white;
+      text-decoration: none;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-size: 1.1em;
+      margin: 10px;
+      transition: background-color 0.3s;
+    }
+    a.button:hover {
+      background-color: #e68900;
+    }
+    footer {
+      margin-top: 40px;
+      padding: 15px;
+      background-color: #0078d7;
+      color: white;
+      font-size: 0.9em;
+    }
+  </style>
 </head>
-
 <body>
+  <header>
+    Willkommen bei Charlytaxi – Minispiele
+  </header>
 
-    <div class="container">
-        <h1>Mini-Game Sammlung</h1>
-        <p>Wähle ein Spiel und hab Spass!</p>
+  <main>
+    <h2>Viel Spaß mit meinen kleinen Spielen!</h2>
+    <p>Hier findest du kreative Minispiele und Links zu meinen Projekten.</p>
 
-        <!-- Link zur Spieleseite -->
-        <a href="minigames.html" class="button">🎮 Spiele öffnen</a>
+    <!-- Link zur Maluniversum-App -->
+    <a href="https://simelb01-source.github.io/malapp/" target="_blank" class="button">
+      🎨 Zur Maluniversum-App
+    </a>
 
-        <!-- Optionaler Link (kann auch entfernt werden) -->
-        <a href="index.html" class="button">🌐 Zur Hauptseite</a>
+    <!-- Beispiel-Link zu weiteren Spielen -->
+    <a href="minigames.html" class="button">
+      🕹️ Zu den Minispielen
+    </a>
+  </main>
 
-        <div class="footer">© 2026 – Maluniversum Mini-Games</div>
-    </div>
-
+  <footer>
+    © 2026 Charlytaxi – Kreative Projekte mit Herz
+  </footer>
 </body>
 </html>
