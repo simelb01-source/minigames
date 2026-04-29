@@ -1,85 +1,44 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-<meta charset="UTF-8">
-<title>Mini‑Game Sammlung – Startseite</title>
-<style>
-  body {
-    margin: 0;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: linear-gradient(135deg, #74ebd5, #ACB6E5);
-    font-family: Arial, sans-serif;
-    color: #fff;
-    text-align: center;
-  }
-
-  .container {
-    background: rgba(0,0,0,0.35);
-    padding: 40px 50px;
-    border-radius: 20px;
-    box-shadow: 0 0 25px rgba(255,255,255,0.4);
-    backdrop-filter: blur(6px);
-  }
-
-  h1 {
-    margin-bottom: 10px;
-    font-size: 36px;
-    font-weight: bold;
-  }
-
-  p {
-    margin-bottom: 30px;
-    font-size: 18px;
-  }
-
-  .btn {
-    display: block;
-    width: 260px;
-    padding: 15px;
-    margin: 12px auto;
-    font-size: 20px;
-    font-weight: bold;
-    color: #333;
-    background: #ffe082;
-    border: none;
-    border-radius: 12px;
-    cursor: pointer;
-    transition: 0.2s;
-  }
-
-  .btn:hover {
-    background: #ffecb3;
-    transform: scale(1.05);
-  }
-
-  .footer {
-    margin-top: 25px;
-    font-size: 14px;
-    opacity: 0.8;
-  }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minispiele Sammlung</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f0f0f0;
+            text-align: center;
+            padding: 40px;
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 30px;
+        }
+        .button {
+            display: inline-block;
+            margin: 15px;
+            padding: 15px 25px;
+            background: #4CAF50;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 18px;
+        }
+        .button:hover {
+            background: #45a049;
+        }
+    </style>
 </head>
 <body>
 
-<div class="container">
-  <h1>Mini‑Game Sammlung</h1>
-  <p>Wähle ein Spiel und hab Spass!</p>
+    <h1>Mimi Mini‑Games Sammlung</h1>
 
-  <button class="btn" onclick="location.href='minigames.html'">
-    🎮 Spiele öffnen
-  </button>
+    <!-- Link zur Minigames-Seite -->
+    <a class="button" href="minigames.html">Mini‑Games öffnen</a>
 
-  <button class="btn" onclick="location.href='https://charles-malu.github.io'">
-    🌐 Zur Hauptseite
-  </button>
-
-  <div class="footer">
-    © 2026 – Maluniversum Mini‑Games
-  </div>
-</div>
+    <!-- ⭐ Neuer Button zur Mal‑App -->
+    <a class="button" href="malapp.html">Mal‑App starten</a>
 
 </body>
 </html>
